@@ -11,7 +11,7 @@ const VideoList = (props) => {
     <ul className='videos'>
       {videos.map((item) => (
         <VideoItem
-          key={item.id}
+          key={item.id + Math.random()}
           video={item}
           onSelectedVideo={handleOnSelectedVideo}
         />

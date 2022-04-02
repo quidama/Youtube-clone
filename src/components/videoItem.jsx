@@ -6,9 +6,7 @@ const VideoItem = (props) => {
   const navigate = useNavigate();
 
   const handleOnClick = (e) => {
-    console.log(e.target);
     const id = e.target.dataset.id || e.target.parentNode.dataset.id;
-    console.log(id);
     if (id === null) {
       return;
     }
@@ -18,7 +16,7 @@ const VideoItem = (props) => {
 
   return (
     <li className='video' onClick={handleOnClick} data-id={props.video.id}>
-      <img className='thumbnails' src={thumbnails.medium.url} alt={title} />
+      <img className='thumbnails' src={thumbnails.default.url} alt={title} />
       <div className='discription' data-id={props.video.id}>
         <span className='title'>{title}</span>
         <span className='channelTitle'>{channelTitle}</span>
