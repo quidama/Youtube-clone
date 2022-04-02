@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './app.css';
-import Header from './components/header';
-import VideoList from './components/videoList';
-import VideoPlayer from './components/videoPlayer';
+import Header from './components/header/header';
+import VideoList from './components/videoList/videoList';
+import VideoPlayer from './components/videoPlayer/videoPlayer';
 
 function App() {
   const [videos, setVideos] = useState([]);
@@ -20,7 +20,7 @@ function App() {
     };
 
     fetch(
-      'https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=24&key=AIzaSyAiW4T9jjYje4DaCC5rLfjHvnSaJ9wzGYg',
+      'https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=25&key=AIzaSyAiW4T9jjYje4DaCC5rLfjHvnSaJ9wzGYg',
       requestOptions
     )
       .then((response) => response.json())
@@ -36,7 +36,7 @@ function App() {
     };
     if (search !== null || search !== '') {
       fetch(
-        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=24&q=${search}&key=AIzaSyAiW4T9jjYje4DaCC5rLfjHvnSaJ9wzGYg`,
+        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${search}&key=AIzaSyAiW4T9jjYje4DaCC5rLfjHvnSaJ9wzGYg`,
         requestOptions
       )
         .then((response) => response.json())

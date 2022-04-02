@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import styles from './search.module.css';
 
 const Search = (props) => {
   const inputRef = useRef();
@@ -12,15 +13,15 @@ const Search = (props) => {
   };
 
   return (
-    <form ref={formRef} className='search' onSubmit={onSubmit}>
+    <form ref={formRef} className={styles.search} onSubmit={onSubmit}>
       <input
         ref={inputRef}
         type='text'
-        className='searchBox'
+        className={styles.input}
         placeholder='Search'
       ></input>
-      <div className='searchBtn'>
-        <img src={'/images/search.png'} className='searchIcon' alt='search' />
+      <div className={styles.button}>
+        <img src={'/images/search.png'} className={styles.icon} alt='search' />
       </div>
     </form>
   );

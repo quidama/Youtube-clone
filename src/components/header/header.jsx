@@ -1,6 +1,7 @@
 import React from 'react';
-import Search from './search';
+import Search from '../search/search';
 import { useNavigate } from 'react-router-dom';
+import styles from './header.module.css';
 
 const Header = (props) => {
   const navigate = useNavigate();
@@ -18,10 +19,10 @@ const Header = (props) => {
   };
 
   return (
-    <div className='header'>
-      <div className='logoNsite' onClick={handleOnClick}>
-        <img className='logo' src={'/images/logo.png'} alt='logo' />
-        <span className='site'>Youtube</span>
+    <div className={styles.header}>
+      <div className={styles.logoNsite} onClick={handleOnClick}>
+        <img className={styles.logo} src={'/images/logo.png'} alt='logo' />
+        <span className={styles.site}>Youtube</span>
       </div>
       <Search onSearch={handleOnSearch} onInit={handleOnInit} />
     </div>

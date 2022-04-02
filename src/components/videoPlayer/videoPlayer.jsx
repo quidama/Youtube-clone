@@ -1,5 +1,6 @@
 import React from 'react';
-import VideoItem from './videoItem';
+import VideoItem from '../videoItem/videoItem';
+import styles from './videoPlayer.module.css';
 
 const VideoPlayer = (props) => {
   const { title, description, channelTitle, publishedAt } = props.video.snippet;
@@ -14,21 +15,21 @@ const VideoPlayer = (props) => {
       : props.video.id;
 
   return (
-    <div className='player'>
-      <div className='videoPlay'>
-        <div className='selectedVideo'>
+    <div className={styles.videoPlayer}>
+      <div className={styles.video}>
+        <div className={styles.selected}>
           <iframe
             src={`https://www.youtube.com/embed/${id}`}
             allow='autoplay; encrypted-media'
             title='video'
           ></iframe>
         </div>
-        <div className='videoTitle'>{title}</div>
-        <div className='videoChannelTitle'>{channelTitle}</div>
-        <div className='videoPublishedAt'>{publishedAt}</div>
-        <div className='videoDescription'>{description}</div>
+        <div className={styles.title}>{title}</div>
+        <div className={styles.channelTitle}>{channelTitle}</div>
+        <div className={styles.publishedAt}>{publishedAt}</div>
+        <div className={styles.description}>{description}</div>
       </div>
-      <ul className='videosSelected'>
+      <ul className={styles.videoList}>
         {props.videos.map((item) => (
           <VideoItem
             key={item.id + Math.random()}
