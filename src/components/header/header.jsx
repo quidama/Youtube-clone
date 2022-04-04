@@ -1,14 +1,12 @@
 import React, { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styles from './header.module.css';
 
 function Header({ onSearch }) {
   const inputRef = useRef();
   const formRef = useRef();
-  const navigate = useNavigate();
 
   const handleOnClick = () => {
-    navigate('/');
+    console.log('go go');
   };
 
   const onSubmit = event => {

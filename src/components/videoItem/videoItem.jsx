@@ -1,28 +1,22 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import styles from './videoItem.module.css';
 
 const VideoItem = props => {
   const { title, channelTitle, thumbnails, publishedAt } = props.video.snippet;
-  const navigate = useNavigate();
-
+  const { display } = props;
   const handleOnClick = e => {
     const id = e.target.dataset.id || e.target.parentNode.dataset.id;
     if (id === null) {
       return;
     }
     props.onSelectedVideo(props.video);
-    navigate('/selected');
   };
 
-  // if (props.others === true) {
-  //   const others = document.querySelector('li');
-  //   others.classList.add('others');
-  // }
+  const displayType = display === 'list' ? styles.list : styles.grid;
 
   return (
     <li
-      className={styles.container}
+      className={`${styles.container} ${displayType}`}
       onClick={handleOnClick}
       data-id={props.video.id}
     >

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styles from './app.module.css';
+import VideoDetails from './components/details/videoDetails';
 import Header from './components/header/header';
 import VideoList from './components/videoList/videoList';
-import VideoPlayer from './components/videoPlayer/videoPlayer';
 
 function App({ youtube }) {
   const [videos, setVideos] = useState([]);
-  const [video, setVideo] = useState('');
+  const [selectedVideo, setSelectedVideo] = useState(null);
 
   const handleOnSearch = query => {
     youtube.search(query).then(items => setVideos(items));
@@ -17,37 +16,30 @@ function App({ youtube }) {
     youtube.mostPopular().then(items => setVideos(items));
   }, []);
 
-  const handleOnSelectedVideo = item => {
-    setVideo(item);
+  const handleOnSelectedVideo = video => {
+    setSelectedVideo(video);
   };
-
+  console.log(selectedVideo);
   return (
-    <BrowserRouter className={styles.app}>
+    <>
       <Header onSearch={handleOnSearch} />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            videos && (
-              <VideoList
-                videos={videos}
-                onSelectedVideo={handleOnSelectedVideo}
-              />
-            )
-          }
-        />
-        <Route
-          path="/selected"
-          element={
-            <VideoPlayer
+      <section className={styles.content}>
+        {selectedVideo && (
+          <div className={styles.detail}>
+            <VideoDetails selectedVideo={selectedVideo} />
+          </div>
+        )}
+        <div className={styles.list}>
+          {videos && (
+            <VideoList
               videos={videos}
-              video={video}
               onSelectedVideo={handleOnSelectedVideo}
+              display={!selectedVideo ? 'list' : 'grid'}
             />
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+          )}
+        </div>
+      </section>
+    </>
   );
 }
 
