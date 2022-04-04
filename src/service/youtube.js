@@ -30,7 +30,8 @@ class Youtube {
         this.getRequestOptions,
       );
       const result = await response.json();
-      return result.items;
+      return result.items.map(item => ({ ...item, id: item.id.videoId }));
+      // return result.items;
     } catch (error) {
       return console.log('error', error);
     }
