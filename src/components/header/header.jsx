@@ -1,56 +1,42 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './header.module.css';
 
-const Header = (props) => {
+function Header({ onSearch }) {
   const inputRef = useRef();
   const formRef = useRef();
-
   const navigate = useNavigate();
 
   const handleOnClick = () => {
-    props.onInit(!props.init);
     navigate('/');
   };
 
-  const handleOnSearch = (search) => {
-    props.onSearch(search);
-  };
-
-  const handleOnInit = () => {
-    props.onInit(!props.init);
-  };
-
-  const onSubmit = (event) => {
+  const onSubmit = event => {
     event.preventDefault();
-    const search = inputRef.current.value;
-    search && props.onSearch(search);
+    const value = inputRef.current.value;
+    value && onSearch(value);
     formRef.current.reset();
   };
 
   return (
-    <div className={styles.header}>
+    <header className={styles.header}>
       <div className={styles.logoNsite} onClick={handleOnClick}>
-        <img className={styles.logo} src={'/images/logo.png'} alt='logo' />
+        <img className={styles.logo} src="/images/logo.png" alt="logo" />
         <span className={styles.site}>Youtube</span>
       </div>
       <form ref={formRef} className={styles.search} onSubmit={onSubmit}>
         <input
           ref={inputRef}
-          type='text'
+          type="text"
           className={styles.input}
-          placeholder='Search'
-        ></input>
-        <div className={styles.button}>
-          <img
-            src={'/images/search.png'}
-            className={styles.icon}
-            alt='search'
-          />
-        </div>
+          placeholder="Search..."
+        />
+        <button className={styles.button} type="submit">
+          <img src="/images/search.png" className={styles.icon} alt="search" />
+        </button>
       </form>
-    </div>
+    </header>
   );
-};
+}
 
 export default Header;

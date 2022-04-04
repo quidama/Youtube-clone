@@ -1,18 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import VideoItem from '../videoItem/videoItem';
 import styles from './videoPlayer.module.css';
 
-const VideoPlayer = (props) => {
+const VideoPlayer = props => {
+  const [others, setOthers] = useState(true);
+  const { id } = props.video;
   const { title, description, channelTitle, publishedAt } = props.video.snippet;
 
-  const handleOnSelectedVideo = (video) => {
+  const handleOnSelectedVideo = video => {
     props.onSelectedVideo(video);
   };
-
-  const id =
-    props.video.kind === 'youtube#searchResult'
-      ? props.video.id.videoId
-      : props.video.id;
 
   return (
     <div className={styles.videoPlayer}>
@@ -20,8 +17,8 @@ const VideoPlayer = (props) => {
         <div className={styles.selected}>
           <iframe
             src={`https://www.youtube.com/embed/${id}`}
-            allow='autoplay; encrypted-media'
-            title='video'
+            allow="autoplay; encrypted-media"
+            title="video"
           ></iframe>
         </div>
         <div className={styles.title}>{title}</div>
@@ -30,11 +27,12 @@ const VideoPlayer = (props) => {
         <div className={styles.description}>{description}</div>
       </div>
       <ul className={styles.videoList}>
-        {props.videos.map((item) => (
+        {props.videos.map(item => (
           <VideoItem
-            key={item.id + Math.random()}
+            key={item.id}
             video={item}
             onSelectedVideo={handleOnSelectedVideo}
+            others={others}
           />
         ))}
       </ul>

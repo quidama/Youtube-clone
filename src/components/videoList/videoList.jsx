@@ -1,18 +1,17 @@
 import React from 'react';
-import VideoItem from '../videoItem/videoItem.jsx';
 import styles from './videoList.module.css';
+import VideoItem from '../videoItem/videoItem.jsx';
 
-const VideoList = (props) => {
-  const { videos } = props;
-
-  const handleOnSelectedVideo = (video) => {
-    props.onSelectedVideo(video);
+const VideoList = ({ videos, onSelectedVideo }) => {
+  const handleOnSelectedVideo = video => {
+    onSelectedVideo(video);
   };
+
   return (
     <ul className={styles.videos}>
-      {videos.map((item) => (
+      {videos.map(item => (
         <VideoItem
-          key={item.id + Math.random()}
+          key={(item.id = item.id.videoId ? item.id.videoId : item.id)}
           video={item}
           onSelectedVideo={handleOnSelectedVideo}
         />

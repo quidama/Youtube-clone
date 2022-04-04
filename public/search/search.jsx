@@ -16,7 +16,7 @@ const Search = (props) => {
     <form ref={formRef} className={styles.search} onSubmit={onSubmit}>
       <input
         ref={inputRef}
-        type='text'
+        type='submit'
         className={styles.input}
         placeholder='Search'
       ></input>
