@@ -9,7 +9,10 @@ function App({ youtube }) {
   const [selectedVideo, setSelectedVideo] = useState(null);
 
   const handleOnSearch = query => {
-    youtube.search(query).then(items => setVideos(items));
+    youtube.search(query).then(items => {
+      setVideos(items);
+      setSelectedVideo(null);
+    });
   };
 
   useEffect(() => {
